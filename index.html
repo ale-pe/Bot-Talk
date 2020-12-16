@@ -1,0 +1,167 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="data.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  background-image: url("cool-background.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.container {
+  border: 2px solid #dedede;
+  background-color: #3498db;
+  border-radius: 25px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;
+}
+
+.container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.container img {
+  float: left;
+  max-width: 60px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.container img.right {
+  float: right;
+  margin-left: 20px;
+  margin-right:0;
+}
+
+.time-right {
+  float: right;
+  color: #aaa;
+}
+
+.time-left {
+  float: left;
+  color: #999;
+}
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: #bdc3c7;
+   color: white;
+   text-align: center;
+}
+</style>
+</head>
+<body onload="debut()">
+
+<h2>Chat Messages</h2>
+<div id="chat-zone">
+
+</div>
+
+<div class="footer" id="bouton-zone">
+    <div class="btn-group-vertical " style="padding-top: 10px;padding-bottom: 10px;background-color: ;">
+        <button type="button" id="button1" onclick="clickbutton(0)" class="btn btn-outline-secondary">fdsff</button>
+        <button type="button" id="button2" onclick="clickbutton(1)" class="btn btn-outline-secondary">1</button>
+        <button type="button" id="button3" onclick="clickbutton(2)" class="btn btn-outline-secondary">1</button>
+      </div>
+  </div>
+
+  <div class="footer" id="input-zone">
+    <input type="text" class="form-control" placeholder="Input group example" aria-label="Input group example" aria-describedby="btnGroupAddon2">
+  </div>
+
+</body>
+</html>
+<script>
+
+var replique = 0
+
+
+document.getElementById("bouton-zone").style.display = "none  ";
+document.getElementById("input-zone").style.display = "none";
+
+function debut() {
+  msg = repliquesbot[0].messagebot
+        var div = document.createElement("div");
+        div.innerHTML = "<p>"+msg+"</p>"
+        div.className = "container"
+        document.getElementById("chat-zone").appendChild(div)
+  replique = 1
+      msg = repliquesbot[1].messagebot
+        var div = document.createElement("div");
+        div.innerHTML = "<p>"+msg+"</p>"
+        div.className = "container"
+
+
+
+
+    var teste = '<div class="container">'+ '<img src="/w3images/bandmember.jpg" alt="Avatar" style="width:100%;">'+'<p>Hello. How are you today?</p>'+'<span class="time-right">11:00</span>'+'</div>'
+    setTimeout(function(){document.getElementById("chat-zone").appendChild(div)
+    showbutton()}, 2000); 
+
+    
+}
+function addMsg(msg) {
+  msg = repliquesbot[replique].messagebot
+        var div = document.createElement("div");
+        div.innerHTML = "<p>"+msg+"</p>"
+        div.className = "container"
+        document.getElementById("chat-zone").appendChild(div)
+    }
+
+    function showbutton() {
+      document.getElementById("bouton-zone").style.display = "block  ";
+        document.getElementById("button1").innerHTML = repliquesbot[1].options[0];
+        document.getElementById("button2").innerHTML = repliquesbot[1].options[1];
+        document.getElementById("button3").innerHTML = repliquesbot[1].options[2];
+    }
+
+    function clickbutton(num) {
+      document.getElementById("bouton-zone").style.display = "none";
+      console.log(num)
+      msg =  repliquesbot[replique].options[num];
+      console.log(repliquesbot[replique].options[num])
+      var div = document.createElement("div");
+      div.innerHTML = "<p>"+msg+"</p>"
+      div.className = "container darker"
+      document.getElementById("chat-zone").appendChild(div)
+      replique = repliquesbot[replique].gotooption[num]
+      try {
+        repliquesbot[replique].gotooption[num]
+        addMsg()
+
+      } catch(err) {
+        var div = document.createElement("div");
+      div.innerHTML = "<p>Malheureusement une erreur est survenue ! Il est possible que le contenu n'existe pas ou ne soit pas encore publié 😅</p>"
+      div.className = "container"
+      document.getElementById("chat-zone").appendChild(div)
+
+      }
+
+      
+    }
+
+</script>
+
+
